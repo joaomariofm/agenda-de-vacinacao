@@ -8,6 +8,8 @@ public class Main {
 		try {
             HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
+						server.createContext("/", new LandingPageHandler());
+
             server.createContext("/create-user", new CreateUsuarioHandler());
             server.createContext("/create-allergy", new CreateAlergiaHandler());
             server.createContext("/create-vaccine", new CreateVacinaHandler());
