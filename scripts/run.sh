@@ -10,7 +10,8 @@ MAIN_CLASS=$(find $ROOT_DIR_PATH/target/classes -name "Main.class")
 
 if [ "$ROOT_DIR_SHA256" == "$COMPARISON_DIR_SHA256" ]; then
 	if [ -f "$MAIN_CLASS" ]; then
-		java -cp "$ROOT_DIR_PATH/target/classes" Main
+		# include a jar
+		java -cp "$ROOT_DIR_PATH/target" -jar "$ROOT_DIR_PATH/target/agenda-vacinacao-1.0-SNAPSHOT.jar"
 	else
 		echo "Main class not found"
 	fi
