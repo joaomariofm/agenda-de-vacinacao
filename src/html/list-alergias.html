@@ -66,6 +66,24 @@
 			})
 		}
 
+		function cleanFormFields() {
+			document.querySelector('#name').value = ''
+		}
+
+		function addAllergy() {
+			const name = document.querySelector('#name').value
+
+			fetch('http://localhost:8080/create-allergy', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ name })
+			})
+
+			cleanFormFields()
+		}
+
 		fetch('http://localhost:8080/list-allergies')
 			.then(response => response.json())
 			.then(data => {
@@ -134,14 +152,17 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Nova Alergia</h5>
-						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+						<button onclick="cleanFormFields()" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<p>...</p>
+						<div>
+							<label for="name" class="form-label">Nome</label>
+							<input type="text" class="form-control" id="name" placeholder="Nome da alergia">
+						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-						<button type="button" class="btn btn-primary">Adicionar</button>
+						<button onclick="cleanFormFields()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+						<button onclick="addAllergy()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Adicionar</button>
 					</div>
 				</div>
 			</div>
