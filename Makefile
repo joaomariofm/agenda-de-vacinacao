@@ -1,5 +1,5 @@
-compile:
-	./scripts/compile.sh
+build:
+	./scripts/build.sh
 
 run:
 	./scripts/run.sh
