@@ -83,6 +83,53 @@
 			})
 		}
 
+		function cleanFormFields() {
+			document.querySelector('#name').value = ''
+			document.querySelector('#birthDate').value = ''
+			document.querySelector('#street').value = ''
+			document.querySelector('#number').value = ''
+			document.querySelector('#sector').value = ''
+			document.querySelector('#city').value = ''
+			document.querySelector('#uf').value = ''
+			document.querySelector('#allergies').value = ''
+		}
+
+		function addUser() {
+			const name = document.querySelector('#name').value
+			const birthDate = document.querySelector('#birthDate').value
+			const sexo = document.querySelector('#sex').value
+			const street = document.querySelector('#street').value
+			const number = document.querySelector('#number').value
+			const sector = document.querySelector('#sector').value
+			const city = document.querySelector('#city').value
+			const uf = document.querySelector('#uf').value
+			const allergies = document.querySelector('#allergies').value
+
+			const allergiesArray = allergies.split(',')
+
+			const user = {
+				name,
+				birthDate,
+				sexo,
+				street,
+				number,
+				sector,
+				city,
+				uf,
+				alergias: allergiesArray
+			}
+
+			fetch('http://localhost:8080/create-user', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(user)
+			})
+
+			cleanFormFields()
+		}
+
 
 		fetch('http://localhost:8080/list-users')
 			.then(response => response.json())
@@ -155,14 +202,60 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Novo Usuario</h5>
-						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+						<button onclick="cleanFormFields()" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<p>...</p>
+						<div class="mb-1">
+							<label for="name" class="form-label">Nome</label>
+							<input type="text" class="form-control" id="name" placeholder="Nome do usuário">
+						</div>
+
+						<div class="mb-1">
+							<label for="birthDate" class="form-label">Data de aniversário</label>
+							<input type="date" class="form-control" id="birthDate">
+						</div>
+
+						<div class="mb-1">
+							<label for="sex" class="form-label">Sexo</label>
+							<select id="sex" class="form-control">
+								<option value="M">Masculino</option>
+								<option value="F">Feminino</option>
+							</select>
+						</div>
+
+						<div class="mb-1">
+							<label for="street" class="form-label">Rua</label>
+							<input type="text" class="form-control" id="street" placeholder="Endereço (Rua)">
+						</div>
+	
+						<div class="mb-1">
+							<label for="number" class="form-label">Número</label>
+							<input type="text" class="form-control" id="number" placeholder="Endereço (Número)">
+						</div>
+
+						<div class="mb-1">
+							<label for="sector" class="form-label">Setor</label>
+							<input type="text" class="form-control" id="sector" placeholder="Endereço (Setor)">
+						</div>
+
+						<div class="mb-1">
+							<label for="city" class="form-label">Cidade</label>
+							<input type="text" class="form-control" id="city" placeholder="Endereço (Cidade)">
+						</div>
+
+						<div class="mb-1">
+							<label for="uf" class="form-label">Estado</label>
+							<input type="text" class="form-control" id="uf" placeholder="Endereço (Estado)">
+						</div>
+
+						<div class="mb-1">
+							<label for="allergies" class="form-label">Alergias</label>
+							<input type="text" class="form-control" id="allergies" placeholder="IDs das alergias do usuário (1,2,...)">
+						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-						<button type="button" class="btn btn-primary">Adicionar</button>
+						<button onclick="cleanFormFields()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+						<button onclick="addUser()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Adicionar</button>
 					</div>
 				</div>
 			</div>
