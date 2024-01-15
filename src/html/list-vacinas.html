@@ -55,51 +55,45 @@
 	</style>
 
 	<script>
-		let appointments = []
+		let vaccines = []
 
-		function setAppointmentsTable(appointments) {
+		function setVaccinesTable(vaccines) {
 			const tableBody = document.querySelector('.table-body')
 
-			tableBody.innerHTML = ''
-
-			appointments.forEach(appointment => {
-				const row = document.createElement('tr')
+			vaccines.forEach(vaccine => {
+				const tr = document.createElement('tr')
 
 				const id = document.createElement('th')
 				id.setAttribute('scope', 'row')
-				id.innerText = appointment.id
+				id.innerText = vaccine.id
 
-				const date = document.createElement('td')
-				date.innerText = appointment.date
+				const title = document.createElement('td')
+				title.innerText = vaccine.title
 
-				const time = document.createElement('td')
-				time.innerText = appointment.hour
+				const doses = document.createElement('td')
+				doses.innerText = vaccine.doses
 
-				const situation = document.createElement('td')
-				situation.innerText = appointment.situation
+				const interval = document.createElement('td')
+				interval.innerText = vaccine.interval
 
-				const user = document.createElement('td')
-				user.innerText = appointment.usuario.name
+				const periodicity = document.createElement('td')
+				periodicity.innerText = vaccine.periodicity
 
-				const vaccine = document.createElement('td')
-				vaccine.innerText = appointment.vacina.name
+				tr.appendChild(id)
+				tr.appendChild(title)
+				tr.appendChild(doses)
+				tr.appendChild(interval)
+				tr.appendChild(periodicity)
 
-				row.appendChild(id)
-				row.appendChild(date)
-				row.appendChild(time)
-				row.appendChild(situation)
-				row.appendChild(user)
-				row.appendChild(vaccine)
-
-				tableBody.appendChild(row)
+				tableBody.appendChild(tr)
 			})
 		}
 
-		fetch('http://localhost:8080/list-appointments')
+		fetch('http://localhost:8080/list-vaccines')
 			.then(response => response.json())
 			.then(data => {
-				appointments = data
-				setAppointmentsTable(appointments)
+				vaccines = data
+				setVaccinesTable(vaccines)
 			})
 	</script>
 </head>
@@ -112,11 +106,11 @@
 
 		<div class="container">
 			<section class="mt-5">
-				<h1>Agendas</h1>
-				
+				<h1>Vacinas</h1>
+
 				<div class="d-flex justify-content-between">
 					<div class="btn-group mt-3">
-						<a href="/" class="btn btn-primary active d-flex align-items-center" aria-current="page">
+						<a href="/" class="btn btn-primary d-flex align-items-center" aria-current="page">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal" viewBox="0 0 16 16">
 		<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
 		<path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
@@ -127,7 +121,7 @@
 		<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
 	</svg>
 						</a>
-						<a href="/list-vaccines-page" class="btn btn-primary d-flex align-items-center">
+						<a href="/list-vaccines-page" class="btn btn-primary active d-flex align-items-center">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-prescription2" viewBox="0 0 16 16">
 		<path d="M7 6h2v2h2v2H9v2H7v-2H5V8h2z"/>
 		<path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v10.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 14.5V4a1 1 0 0 1-1-1zm2 3v10.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V4zM3 3h10V1H3z"/>
@@ -153,11 +147,10 @@
 					<thead>
 						<tr>
 							<th scope="col">ID</th>
-							<th scope="col">Data</th>
-							<th scope="col">Hora</th>
-							<th scope="col">Situação</th>
-							<th scope="col">Usuário</th>
-							<th scope="col">Vacina</th>
+							<th scope="col">Titulo</th>
+							<th scope="col">Doses</th>
+							<th scope="col">Intervalo</th>
+							<th scope="col">Periodicidade</th>
 						</tr>
 					</thead>
 					<tbody class="table-body">
