@@ -77,6 +77,40 @@
 			})
 		}
 
+		function cleanFormFields() {
+			document.querySelector('#title').value = ''
+			document.querySelector('#description').value = ''
+			document.querySelector('#dose').value = ''
+			document.querySelector('#periodicity').value = ''
+			document.querySelector('#interval').value = ''
+		}
+
+		function addVaccine() {
+			const title = document.querySelector('#title').value
+			const description = document.querySelector('#description').value
+			const doses = document.querySelector('#doses').value
+			const periodicity = document.querySelector('#periodicity').value
+			const interval = document.querySelector('#interval').value
+
+			const vaccine = {
+				title,
+				description,
+				doses,
+				periodicity,
+				interval
+			}
+
+			fetch('http://localhost:8080/create-vaccine', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(vaccine)
+			})
+
+			cleanFormFields()
+		}
+
 		fetch('http://localhost:8080/list-vaccines')
 			.then(response => response.json())
 			.then(data => {
@@ -147,14 +181,37 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Nova Vacina</h5>
-						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+						<button onclick="cleanFormFields()" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<p>...</p>
+						<div class="mb-1">
+							<label for="title" class="form-label">Título</label>
+							<input type="text" class="form-control" id="title" placeholder="Título da vacina">
+						</div>
+
+						<div class="mb-1">
+							<label for="description" class="form-label">Descrição</label>
+							<input type="text" class="form-control" id="description" placeholder="Descrição da vacina">
+						</div>
+
+						<div class="mb-1">
+							<label for="doses" class="form-label">Doses</label>
+							<input type="text" class="form-control" id="doses" placeholder="Doses da vacina">
+						</div>
+
+						<div class="mb-1">
+							<label for="periodicity" class="form-label">Periodicidade</label>
+							<input type="text" class="form-control" id="periodicity" placeholder="Periodicidade da vacina">
+						</div>
+
+						<div>
+							<label for="interval" class="form-label">Intervalo</label>
+							<input type="text" class="form-control" id="interval" placeholder="Intervalo da vacina">
+						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-						<button type="button" class="btn btn-primary">Adicionar</button>
+						<button onclick="cleanFormFields()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+						<button onclick="addVaccine()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Adicionar</button>
 					</div>
 				</div>
 			</div>
