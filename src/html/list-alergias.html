@@ -89,20 +89,27 @@
 			})
 
 			cleanFormFields()
+			loadAllergies()
 		}
 
 		function deleteAllergy(id) {
 			fetch('http://localhost:8080/delete-allergy/' + id, {
 				method: 'DELETE'
 			})
+
+			loadAllergies()
 		}
 
-		fetch('http://localhost:8080/list-allergies')
-			.then(response => response.json())
-			.then(data => {
-				allergies = data
-				setAllergyTable(allergies)
-			})
+		function loadAllergies() {
+			fetch('http://localhost:8080/list-allergies')
+				.then(response => response.json())
+				.then(data => {
+					allergies = data
+					setAllergyTable(allergies)
+				})
+		}
+
+		loadAllergies()
 	</script>
 </head>
 <body>
