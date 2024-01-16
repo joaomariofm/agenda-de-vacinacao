@@ -54,13 +54,20 @@
 				const row = document.createElement('tr')
 				const id = document.createElement('th')
 				const name = document.createElement('td')
+				const deleteButton = document.createElement('td')
 
 				id.setAttribute('scope', 'row')
+				id.classList.add('align-middle')
 				id.innerText = allergy.id
 				name.innerText = allergy.name
+				name.classList.add('align-middle')
+
+				deleteButton.innerHTML = "<button class='btn btn-danger' onclick='deleteAllergy(" + allergy.id + ")'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'><path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/></svg></button>"
+				deleteButton.classList.add('d-flex', 'justify-content-end')
 
 				row.appendChild(id)
 				row.appendChild(name)
+				row.appendChild(deleteButton)
 
 				table.appendChild(row)
 			})
@@ -82,6 +89,12 @@
 			})
 
 			cleanFormFields()
+		}
+
+		function deleteAllergy(id) {
+			fetch('http://localhost:8080/delete-allergy/' + id, {
+				method: 'DELETE'
+			})
 		}
 
 		fetch('http://localhost:8080/list-allergies')
@@ -139,6 +152,7 @@
 						<tr>
 							<th scope="col">ID</th>
 							<th scope="col">Name</th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody class="table-body">
