@@ -23,6 +23,7 @@ public class Main {
 			server.createContext("/list-vaccines", new ListVacinasHandler());
 			server.createContext("/list-appointments", new ListAgendasHandler());
 
+			server.createContext("/delete-user", new DeleteUsuarioHandler());
 			server.createContext("/delete-allergy", new DeleteAlergiaHandler());
 			server.createContext("/delete-vaccine", new DeleteVacinaHandler());
 

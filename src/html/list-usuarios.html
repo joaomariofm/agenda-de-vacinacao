@@ -55,22 +55,32 @@
 
 				const id = document.createElement('th')
 				id.setAttribute('scope', 'row')
+				id.classList.add('align-middle')
 				id.innerText = user.id
 
 				const name = document.createElement('td')
+				name.classList.add('align-middle')
 				name.innerText = user.name
 
 				const birthDate = document.createElement('td')
+				birthDate.classList.add('align-middle')
 				birthDate.innerText = user.birthDate
 
 				const city = document.createElement('td')
+				city.classList.add('align-middle')
 				city.innerText = user.city
 
 				const uf = document.createElement('td')
+				uf.classList.add('align-middle')
 				uf.innerText = user.uf
 
 				const sex = document.createElement('td')
+				sex.classList.add('align-middle')
 				sex.innerText = user.sexo
+
+				const deleteButton = document.createElement('td')
+				deleteButton.innerHTML = "<button class='btn btn-danger' onclick='deleteUser(" + user.id + ")'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'><path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/></svg></button>"
+				deleteButton.classList.add('d-flex', 'justify-content-end')
 
 				row.appendChild(id)
 				row.appendChild(name)
@@ -78,6 +88,7 @@
 				row.appendChild(city)
 				row.appendChild(uf)
 				row.appendChild(sex)
+				row.appendChild(deleteButton)
 
 				tableBody.appendChild(row)
 			})
@@ -128,15 +139,27 @@
 			})
 
 			cleanFormFields()
+			loadUsers()
 		}
 
-
-		fetch('http://localhost:8080/list-users')
-			.then(response => response.json())
-			.then(data => {
-				users = data
-				setUsersTable(users)
+		function deleteUser(id) {
+			fetch('http://localhost:8080/delete-user/' + id, {
+				method: 'DELETE'
 			})
+
+			loadUsers()
+		}
+		
+		function loadUsers() {
+			fetch('http://localhost:8080/list-users')
+				.then(response => response.json())
+				.then(data => {
+					users = data
+					setUsersTable(users)
+				})
+		}
+
+		loadUsers()
 	</script>
 </head>
 <body>
@@ -189,6 +212,7 @@
 							<th scope="col">Cidade</th>
 							<th scope="col">Uf</th>
 							<th scope="col">Sexo</th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody class="table-body">

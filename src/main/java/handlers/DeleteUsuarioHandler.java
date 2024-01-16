@@ -6,10 +6,10 @@ import java.io.IOException;
 import javax.persistence.EntityManager;
 
 import persistence.JPAUtil;
-import entities.Alergia;
-import DAOs.AlergiaDAO;
+import entities.Usuario;
+import DAOs.UsuarioDAO;
 
-public class DeleteAlergiaHandler implements HttpHandler {
+public class DeleteUsuarioHandler implements HttpHandler {
 	public void handle(HttpExchange exchange) throws IOException {
 		String method = exchange.getRequestMethod();
 		String path = exchange.getRequestURI().getPath();
@@ -18,11 +18,11 @@ public class DeleteAlergiaHandler implements HttpHandler {
 
 		if (method.equals("DELETE")) {
 			EntityManager entityManager = JPAUtil.getEntityManager();
-			AlergiaDAO alergiaDAO = new AlergiaDAO(entityManager);
-			Alergia alergia = alergiaDAO.read(Integer.parseInt(id));
+			UsuarioDAO usuarioDAO = new UsuarioDAO(entityManager);
+			Usuario usuario = usuarioDAO.read(Integer.parseInt(id));
 
-			if (alergia != null) {
-				alergiaDAO.delete(alergia);
+			if (usuario != null) {
+				usuarioDAO.delete(usuario);
 				exchange.sendResponseHeaders(200, 0);
 			} else {
 				exchange.sendResponseHeaders(404, 0);
