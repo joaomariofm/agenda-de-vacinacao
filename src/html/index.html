@@ -84,6 +84,46 @@
 			})
 		}
 
+		function cleanFormFields() {
+			document.querySelector('#date').value = ''
+			document.querySelector('#hour').value = ''
+			document.querySelector('#situation').value = ''
+			document.querySelector('#situationDate').value = ''
+			document.querySelector('#observation').value = ''
+			document.querySelector('#vacinaId').value = ''
+			document.querySelector('#usuarioId').value = ''
+		}
+
+		function addAppointment() {
+			const date = document.querySelector('#date').value
+			const hour = document.querySelector('#hour').value
+			const situation = document.querySelector('#situation').value
+			const situationDate = document.querySelector('#situationDate').value
+			const observation = document.querySelector('#observation').value
+			const vacinaId = document.querySelector('#vacinaId').value
+			const usuarioId = document.querySelector('#usuarioId').value
+
+			const appointment = {
+				date,
+				hour,
+				situation,
+				situationDate,
+				observation,
+				vacinaId,
+				usuarioId
+			}
+
+			fetch('http://localhost:8080/create-appointment', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(appointment)
+			})
+
+			cleanFormFields()
+		}
+
 		fetch('http://localhost:8080/list-appointments')
 			.then(response => response.json())
 			.then(data => {
@@ -155,14 +195,47 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Nova Agenda</h5>
-						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+						<button onclick="cleanFormFields()" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<p>...</p>
+						<div class="mb-1">
+							<label for="date" class="form-label">Data da agenda</label>
+							<input type="date" class="form-control" id="date" placeholder="Data de criação da agenda">
+						</div>	
+
+						<div class="mb-1">
+							<label for="hour" class="form-label">Horário</label>
+							<input type="time" class="form-control" id="hour" placeholder="Horário">
+						</div>
+
+						<div class="mb-1">
+							<label for="situation" class="form-label">Situação</label>
+							<input type="text" class="form-control" id="situation" placeholder="Situação da agenda">
+						</div>
+
+						<div class="mb-1">
+							<label for="situationDate" class="form-label">Data da situação</label>
+							<input type="date" class="form-control" id="situationDate" placeholder="Data da situação">
+						</div>
+
+						<div class="mb-1">
+							<label for="observation" class="form-label">Observação</label>
+							<input type="text" class="form-control" id="observation" placeholder="Inclua uma observação">
+						</div>
+
+						<div class="mb-1">
+							<label for="vacinaId" class="form-label">ID da vacina</label>
+							<input type="text" class="form-control" id="vacinaId" placeholder="Inclua o id da vacina">
+						</div>
+
+						<div class="mb-1">
+							<label for="usuarioId" class="form-label">ID do usuário</label>
+							<input type="text" class="form-control" id="usuarioId" placeholder="Inclua o id do usuário">
+						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-						<button type="button" class="btn btn-primary">Adicionar</button>
+						<button onclick="cleanFormFields()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+						<button onclick="addAppointment()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Adicionar</button>
 					</div>
 				</div>
 			</div>
