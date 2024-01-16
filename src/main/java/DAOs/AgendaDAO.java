@@ -19,10 +19,11 @@ public class AgendaDAO {
         entityManager.getTransaction().commit();
     }
 
-    public void read(Agenda agenda) {
-        entityManager.getTransaction().begin();
-        entityManager.find(Agenda.class, agenda.getId());
-        entityManager.getTransaction().commit();
+    public Agenda read(int id) {
+			entityManager.getTransaction().begin();
+			Agenda agenda = entityManager.find(Agenda.class, id);
+			entityManager.getTransaction().commit();
+			return agenda;
     }
 
     public ArrayList<Agenda> readAll() {

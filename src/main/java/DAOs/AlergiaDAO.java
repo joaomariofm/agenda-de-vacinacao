@@ -22,7 +22,6 @@ public class AlergiaDAO {
     public Alergia read(int id) {
         entityManager.getTransaction().begin();
         Alergia alergia = entityManager.find(Alergia.class, id);
-        System.out.println(alergia);
         entityManager.getTransaction().commit();
         return alergia;
     }

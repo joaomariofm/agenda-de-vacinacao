@@ -56,22 +56,32 @@
 
 				const id = document.createElement('th')
 				id.setAttribute('scope', 'row')
+				id.classList.add('align-middle')
 				id.innerText = appointment.id
 
 				const date = document.createElement('td')
+				date.classList.add('align-middle')
 				date.innerText = appointment.date
 
 				const time = document.createElement('td')
+				time.classList.add('align-middle')
 				time.innerText = appointment.hour
 
 				const situation = document.createElement('td')
+				situation.classList.add('align-middle')
 				situation.innerText = appointment.situation
 
 				const user = document.createElement('td')
+				user.classList.add('align-middle')
 				user.innerText = appointment.usuario.name
 
 				const vaccine = document.createElement('td')
+				vaccine.classList.add('align-middle')
 				vaccine.innerText = appointment.vacina.title
+
+				const deleteButton = document.createElement('td')
+				deleteButton.innerHTML = "<button class='btn btn-danger' onclick='deleteAppointment(" + appointment.id + ")'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'><path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/></svg></button>"
+				deleteButton.classList.add('d-flex', 'justify-content-end')
 
 				row.appendChild(id)
 				row.appendChild(date)
@@ -79,6 +89,7 @@
 				row.appendChild(situation)
 				row.appendChild(user)
 				row.appendChild(vaccine)
+				row.appendChild(deleteButton)
 
 				tableBody.appendChild(row)
 			})
@@ -122,14 +133,27 @@
 			})
 
 			cleanFormFields()
+			loadAppointments()
 		}
 
-		fetch('http://localhost:8080/list-appointments')
-			.then(response => response.json())
-			.then(data => {
-				appointments = data
-				setAppointmentsTable(appointments)
+		function deleteAppointment(id) {
+			fetch('http://localhost:8080/delete-appointment/' + id, {
+				method: 'DELETE'
 			})
+
+			loadAppointments()
+		}
+
+		function loadAppointments() {
+			fetch('http://localhost:8080/list-appointments')
+				.then(response => response.json())
+				.then(data => {
+					appointments = data
+					setAppointmentsTable(appointments)
+				})
+		}
+
+		loadAppointments()
 	</script>
 </head>
 <body>
@@ -182,6 +206,7 @@
 							<th scope="col">Situação</th>
 							<th scope="col">Usuário</th>
 							<th scope="col">Vacina</th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody class="table-body">
