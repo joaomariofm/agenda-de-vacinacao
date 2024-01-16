@@ -48,6 +48,8 @@
 		function setVaccinesTable(vaccines) {
 			const tableBody = document.querySelector('.table-body')
 
+			tableBody.innerHTML = ''
+
 			vaccines.forEach(vaccine => {
 				const tr = document.createElement('tr')
 
@@ -109,14 +111,19 @@
 			})
 
 			cleanFormFields()
+			loadVaccines()
+		}
+	
+		function loadVaccines() {
+			fetch('http://localhost:8080/list-vaccines')
+				.then(response => response.json())
+				.then(data => {
+					vaccines = data
+					setVaccinesTable(vaccines)
+				})
 		}
 
-		fetch('http://localhost:8080/list-vaccines')
-			.then(response => response.json())
-			.then(data => {
-				vaccines = data
-				setVaccinesTable(vaccines)
-			})
+		loadVaccines()
 	</script>
 </head>
 <body>
