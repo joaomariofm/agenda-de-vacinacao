@@ -55,25 +55,36 @@
 
 				const id = document.createElement('th')
 				id.setAttribute('scope', 'row')
+				id.classList.add('align-middle')
 				id.innerText = vaccine.id
 
 				const title = document.createElement('td')
+				title.classList.add('align-middle')
 				title.innerText = vaccine.title
 
 				const doses = document.createElement('td')
+				doses.classList.add('align-middle')
 				doses.innerText = vaccine.doses
 
 				const interval = document.createElement('td')
+				interval.classList.add('align-middle')
 				interval.innerText = vaccine.interval
 
 				const periodicity = document.createElement('td')
+				periodicity.classList.add('align-middle')
 				periodicity.innerText = vaccine.periodicity
+
+				const deleteButton = document.createElement('td')
+				deleteButton.innerHTML = "<button class='btn btn-danger' onclick='deleteVaccine(" + vaccine.id + ")'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'><path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/></svg></button>"
+				deleteButton.classList.add('d-flex', 'justify-content-end')
+
 
 				tr.appendChild(id)
 				tr.appendChild(title)
 				tr.appendChild(doses)
 				tr.appendChild(interval)
 				tr.appendChild(periodicity)
+				tr.appendChild(deleteButton)
 
 				tableBody.appendChild(tr)
 			})
@@ -111,6 +122,14 @@
 			})
 
 			cleanFormFields()
+			loadVaccines()
+		}
+
+		function deleteVaccine(id) {
+			fetch('http://localhost:8080/delete-vaccine/' + id, {
+				method: 'DELETE'
+			})
+
 			loadVaccines()
 		}
 	
@@ -175,6 +194,7 @@
 							<th scope="col">Doses</th>
 							<th scope="col">Intervalo</th>
 							<th scope="col">Periodicidade</th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody class="table-body">

@@ -24,6 +24,7 @@ public class Main {
 			server.createContext("/list-appointments", new ListAgendasHandler());
 
 			server.createContext("/delete-allergy", new DeleteAlergiaHandler());
+			server.createContext("/delete-vaccine", new DeleteVacinaHandler());
 
 			server.start();
 
