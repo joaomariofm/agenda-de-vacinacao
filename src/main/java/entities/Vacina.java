@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import enums.Periodicidade;
 
 @Entity
 public class Vacina {
@@ -18,14 +19,14 @@ public class Vacina {
     private int doses;
 
     @Column(name = "periodicidade")
-    private int periodicity;
+    private Periodicidade periodicity;
 
     @Column(name = "intervalo")
     private int interval;
 
     public Vacina() {}
 
-    public Vacina(String title, String description, int doses, int periodicity, int interval) {
+    public Vacina(String title, String description, int doses, Periodicidade periodicity, int interval) {
         this.title = title;
         this.description = description;
         this.doses = doses;
@@ -49,7 +50,7 @@ public class Vacina {
         return this.doses;
     }
 
-    public int getPeriodicity() {
+    public Periodicidade getPeriodicity() {
         return this.periodicity;
     }
 

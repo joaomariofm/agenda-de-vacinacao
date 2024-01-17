@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import persistence.JPAUtil;
 import entities.Vacina;
 import DAOs.VacinaDAO;
+import enums.Periodicidade;
 
 public class CreateVacinaHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
@@ -30,6 +31,16 @@ public class CreateVacinaHandler implements HttpHandler {
 
             EntityManager entityManager = JPAUtil.getEntityManager();
             VacinaDAO vacinaDAO = new VacinaDAO(entityManager);
+						
+						if (vacina.getPeriodicity() != Periodicidade.dias &&
+								vacina.getPeriodicity() != Periodicidade.semanas &&
+								vacina.getPeriodicity() != Periodicidade.meses &&
+								vacina.getPeriodicity() != Periodicidade.anos
+							) {
+								exchange.sendResponseHeaders(400, 0);
+								exchange.getResponseBody().close();
+								return;
+						}
 
             vacinaDAO.create(vacina);
 

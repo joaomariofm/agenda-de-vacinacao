@@ -1,6 +1,6 @@
 # TASKS
 
-- [ ] ajustar **campo de periodicidade** da **tabela vacinas para** um **enum (dias, semanas, meses, anos)**
+- [x] ajustar **campo de periodicidade** da **tabela vacinas para** um **enum (dias, semanas, meses, anos)**
 
 - [ ] ajustar **comapo de situacao** da **tabela agendas** para receber um valor **enum ("Agendado", "Cancelado", "Realizado")** ou **Nulo**
 
