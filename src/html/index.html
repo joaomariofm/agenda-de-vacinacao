@@ -71,6 +71,15 @@
 				situation.classList.add('align-middle')
 				situation.innerText = appointment.situation
 
+				const situationDate = document.createElement('td')
+				situationDate.classList.add('align-middle')
+
+				if (appointment.situationDate) {
+					situationDate.innerText = appointment.situationDate
+				} else {
+					situationDate.innerText = '-'
+				}
+
 				const user = document.createElement('td')
 				user.classList.add('align-middle')
 				user.innerText = appointment.usuario.name
@@ -87,6 +96,7 @@
 				row.appendChild(date)
 				row.appendChild(time)
 				row.appendChild(situation)
+				row.appendChild(situationDate)
 				row.appendChild(user)
 				row.appendChild(vaccine)
 				row.appendChild(deleteButton)
@@ -200,6 +210,7 @@
 							<th scope="col">Data</th>
 							<th scope="col">Hora</th>
 							<th scope="col">Situação</th>
+							<th scope="col">Data situação</th>
 							<th scope="col">Usuário</th>
 							<th scope="col">Vacina</th>
 							<th scope="col"></th>
