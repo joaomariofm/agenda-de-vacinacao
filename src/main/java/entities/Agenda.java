@@ -2,6 +2,7 @@ package entities;
 
 import java.sql.Date;
 import javax.persistence.*;
+import enums.Situacao;
 
 @Entity
 public class Agenda {
@@ -16,7 +17,7 @@ public class Agenda {
     private String hour;
 
     @Column(name = "situacao")
-    private String situation;
+    private Situacao situation;
 
     @Column(name = "data_situacao")
     private String situationDate;
@@ -34,7 +35,7 @@ public class Agenda {
 
     public Agenda() {}
 
-    public Agenda(String date, String hour, String situation, String situationDate, String observation, Vacina vacina, Usuario usuario) {
+    public Agenda(String date, String hour, Situacao situation, String situationDate, String observation, Vacina vacina, Usuario usuario) {
         this.date = date;
         this.hour = hour;
         this.situation = situation;
@@ -56,7 +57,7 @@ public class Agenda {
         return this.hour;
     }
 
-    public String getSituation() {
+    public Situacao getSituation() {
         return this.situation;
     }
 

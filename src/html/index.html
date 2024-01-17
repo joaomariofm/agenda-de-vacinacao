@@ -98,8 +98,6 @@
 		function cleanFormFields() {
 			document.querySelector('#date').value = ''
 			document.querySelector('#hour').value = ''
-			document.querySelector('#situation').value = ''
-			document.querySelector('#situationDate').value = ''
 			document.querySelector('#observation').value = ''
 			document.querySelector('#vacinaId').value = ''
 			document.querySelector('#usuarioId').value = ''
@@ -108,8 +106,6 @@
 		function addAppointment() {
 			const date = document.querySelector('#date').value
 			const hour = document.querySelector('#hour').value
-			const situation = document.querySelector('#situation').value
-			const situationDate = document.querySelector('#situationDate').value
 			const observation = document.querySelector('#observation').value
 			const vacinaId = document.querySelector('#vacinaId').value
 			const usuarioId = document.querySelector('#usuarioId').value
@@ -117,8 +113,8 @@
 			const appointment = {
 				date,
 				hour,
-				situation,
-				situationDate,
+				situation: null,
+				situationDate: null,
 				observation,
 				vacinaId,
 				usuarioId
@@ -231,16 +227,6 @@
 						<div class="mb-1">
 							<label for="hour" class="form-label">Horário</label>
 							<input type="time" class="form-control" id="hour" placeholder="Horário">
-						</div>
-
-						<div class="mb-1">
-							<label for="situation" class="form-label">Situação</label>
-							<input type="text" class="form-control" id="situation" placeholder="Situação da agenda">
-						</div>
-
-						<div class="mb-1">
-							<label for="situationDate" class="form-label">Data da situação</label>
-							<input type="date" class="form-control" id="situationDate" placeholder="Data da situação">
 						</div>
 
 						<div class="mb-1">

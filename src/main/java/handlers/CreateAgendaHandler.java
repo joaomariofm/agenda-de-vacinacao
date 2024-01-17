@@ -17,6 +17,7 @@ import DAOs.AgendaDAO;
 import DAOs.VacinaDAO;
 import DAOs.UsuarioDAO;
 import handlers.payloads.CreateAgendaPayload;
+import enums.Situacao;
 
 public class CreateAgendaHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
@@ -40,10 +41,11 @@ public class CreateAgendaHandler implements HttpHandler {
 
             Vacina vacina = vacinaDAO.read(payload.getVacinaId());
             Usuario usuario = usuarioDAO.read(payload.getUsuarioId());
+
             Agenda agenda = new Agenda(
                 payload.getDate(),
                 payload.getHour(),
-                payload.getSituation(),
+                Situacao.Agendado,
                 payload.getSituationDate(),
                 payload.getObservation(),
                 vacina,

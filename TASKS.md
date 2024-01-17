@@ -2,7 +2,7 @@
 
 - [x] ajustar **campo de periodicidade** da **tabela vacinas para** um **enum (dias, semanas, meses, anos)**
 
-- [ ] ajustar **comapo de situacao** da **tabela agendas** para receber um valor **enum ("Agendado", "Cancelado", "Realizado")** ou **Nulo**
+- [x] ajustar **comapo de situacao** da **tabela agendas** para receber um valor **enum ("Agendado", "Cancelado", "Realizado")**
 
 - [ ] refatorar **handler de criação de agendas**
     
