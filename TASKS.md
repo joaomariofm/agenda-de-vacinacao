@@ -16,4 +16,12 @@
 
 - [ ] criar opções de marcar agenda como "Cancelada" ou "Realizada"
 
+- [ ] criar visualização das **alergias** de um usuário em específico
+
+- [ ] criar filtro para visualizar apenas as **agendas do dia corrente**
+
+- [ ] sempre exibir primeiro as agendas no estado **Aguardando**, depois as agendas nos estados **Realizado** e **Cancelado**
+
+- [ ] criar filtro para visualizar apenas as **agendas** de um usuário em específico
+
 - [ ] alterar **input de estado (uf)** no **formulário do usuário** para um **select com os 26 etados**
