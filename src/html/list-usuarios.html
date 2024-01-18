@@ -44,6 +44,7 @@
 
 	<script>
 		let users = []
+		let allergies = []
 
 		function setUsersTable(users) {
 			const tableBody = document.querySelector('.table-body')
@@ -94,6 +95,20 @@
 			})
 		}
 
+		function setAllergiesSelect(allergies) {
+			const allergiesSelect = document.querySelector('#allergies')
+
+			allergiesSelect.innerHTML = ''
+
+			allergies.forEach(allergy => {
+				const option = document.createElement('option')
+				option.value = allergy.id
+				option.innerText = allergy.name
+
+				allergiesSelect.appendChild(option)
+			})
+		}
+
 		function cleanFormFields() {
 			document.querySelector('#name').value = ''
 			document.querySelector('#birthDate').value = ''
@@ -114,9 +129,15 @@
 			const sector = document.querySelector('#sector').value
 			const city = document.querySelector('#city').value
 			const uf = document.querySelector('#uf').value
-			const allergies = document.querySelector('#allergies').value
+			const allergies = document.querySelector('#allergies')
 
-			const allergiesArray = allergies.split(',')
+			const allergiesArray = []
+
+			for (let i = 0; i < allergies.options.length; i++) {
+				if (allergies.options[i].selected) {
+					allergiesArray.push(allergies.options[i].value)
+				}
+			}
 
 			const user = {
 				name,
@@ -159,6 +180,16 @@
 				})
 		}
 
+		function loadAllergies() {
+			fetch('http://localhost:8080/list-allergies')
+				.then(response => response.json())
+				.then(data => {
+					allergies = data
+					setAllergiesSelect(allergies)
+				})
+		}
+
+		loadAllergies()
 		loadUsers()
 	</script>
 </head>
@@ -274,7 +305,8 @@
 
 						<div class="mb-1">
 							<label for="allergies" class="form-label">Alergias</label>
-							<input type="text" class="form-control" id="allergies" placeholder="IDs das alergias do usuário (1,2,...)">
+							<select id="allergies" class="form-control" multiple>
+							</select>
 						</div>
 					</div>
 					<div class="modal-footer">

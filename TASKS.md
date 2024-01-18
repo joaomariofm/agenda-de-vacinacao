@@ -4,7 +4,7 @@
 
 - [x] ajustar **compo de situacao** da **tabela agendas** para receber um valor **enum ("Agendado", "Cancelado", "Realizado")**
 
-- [ ] adicionar **select de alergias** no formulário de criação de **usuário**
+- [x] adicionar **select de alergias** no formulário de criação de **usuário**
 
 - [ ] adicionar **select de vacinas** no formulário de criação de **agenda**
 
