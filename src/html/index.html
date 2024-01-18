@@ -45,6 +45,8 @@
 
 	<script>
 		let appointments = []
+		let vaccines = []
+		let users = []
 
 		function setAppointmentsTable(appointments) {
 			const tableBody = document.querySelector('.table-body')
@@ -105,20 +107,48 @@
 			})
 		}
 
+		function setVaccinesSelect(vaccines) {
+			const select = document.querySelector('#vaccine')
+
+			select.innerHTML = ''
+
+			vaccines.forEach(vaccine => {
+				const option = document.createElement('option')
+				option.value = vaccine.id
+				option.innerText = vaccine.title
+
+				select.appendChild(option)
+			})
+		}
+
+		function setUsersSelect(users) {
+			const select = document.querySelector('#user')
+
+			select.innerHTML = ''
+
+			users.forEach(user => {
+				const option = document.createElement('option')
+				option.value = user.id
+				option.innerText = user.name
+
+				select.appendChild(option)
+			})
+		}
+
 		function cleanFormFields() {
 			document.querySelector('#date').value = ''
 			document.querySelector('#hour').value = ''
 			document.querySelector('#observation').value = ''
-			document.querySelector('#vacinaId').value = ''
-			document.querySelector('#usuarioId').value = ''
+			document.querySelector('#vaccine').value = ''
+			document.querySelector('#user').value = ''
 		}
 
 		function addAppointment() {
 			const date = document.querySelector('#date').value
 			const hour = document.querySelector('#hour').value
 			const observation = document.querySelector('#observation').value
-			const vacinaId = document.querySelector('#vacinaId').value
-			const usuarioId = document.querySelector('#usuarioId').value
+			const vaccine = document.querySelector('#vaccine').value
+			const user = document.querySelector('#user').value
 
 			const appointment = {
 				date,
@@ -126,8 +156,8 @@
 				situation: null,
 				situationDate: null,
 				observation,
-				vacinaId,
-				usuarioId
+				vacinaId: vaccine,
+				usuarioId: user
 			}
 
 			fetch('http://localhost:8080/create-appointment', {
@@ -159,6 +189,26 @@
 				})
 		}
 
+		function loadVaccines() {
+			fetch('http://localhost:8080/list-vaccines')
+				.then(response => response.json())
+				.then(data => {
+					vaccines = data
+					setVaccinesSelect(vaccines)
+				})
+		}
+
+		function loadUsers() {
+			fetch('http://localhost:8080/list-users')
+				.then(response => response.json())
+				.then(data => {
+					users = data
+					setUsersSelect(users)
+				})
+		}
+
+		loadVaccines()
+		loadUsers()
 		loadAppointments()
 	</script>
 </head>
@@ -247,12 +297,14 @@
 
 						<div class="mb-1">
 							<label for="vacinaId" class="form-label">ID da vacina</label>
-							<input type="text" class="form-control" id="vacinaId" placeholder="Inclua o id da vacina">
+							<select class="form-select" id="vaccine">
+							</select>
 						</div>
 
 						<div class="mb-1">
 							<label for="usuarioId" class="form-label">ID do usuário</label>
-							<input type="text" class="form-control" id="usuarioId" placeholder="Inclua o id do usuário">
+							<select class="form-select" id="user">
+							</select>
 						</div>
 					</div>
 					<div class="modal-footer">

@@ -6,9 +6,9 @@
 
 - [x] adicionar **select de alergias** no formulário de criação de **usuário**
 
-- [ ] adicionar **select de vacinas** no formulário de criação de **agenda**
+- [x] adicionar **select de vacinas** no formulário de criação de **agenda**
 
-- [ ] adicionar **select de usuários** no formulário de criação de **agenda**
+- [x] adicionar **select de usuários** no formulário de criação de **agenda**
 
 - [ ] refatorar **handler de criação de agendas**
     
