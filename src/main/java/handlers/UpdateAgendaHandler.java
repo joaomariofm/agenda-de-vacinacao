@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 import com.google.gson.Gson;
-import java.util.Date;
+import java.time.LocalDate;
 
 import persistence.JPAUtil;
 import entities.Agenda;
@@ -37,7 +37,7 @@ public class UpdateAgendaHandler implements HttpHandler {
 			AgendaDAO agendaDAO = new AgendaDAO(entityManager);
 			Agenda agenda = agendaDAO.read(Integer.parseInt(id));
 
-			Date date = new Date();
+			LocalDate date = LocalDate.now();
 
 			agenda.setSituationDate(date.toString());
 

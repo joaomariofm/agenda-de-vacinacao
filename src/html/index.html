@@ -193,13 +193,23 @@
 		}
 
 		function checkAppointment(id) {
-			console.log('checkAppointment', id)
+			fetch('http://localhost:8080/update-appointment/' + id, {
+				method: 'PUT',
+				body: JSON.stringify({
+					situation: 'Realizado',
+				}),
+			})
 
 			loadAppointments()
 		}
 
 		function cancelAppointment(id) {
-			console.log('cancelAppointment', id)
+			fetch('http://localhost:8080/update-appointment/' + id, {
+				method: 'PUT',
+				body: JSON.stringify({
+					situation: 'Cancelado',
+				}),
+			})
 
 			loadAppointments()
 		}
