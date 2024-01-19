@@ -28,6 +28,8 @@ public class Main {
 			server.createContext("/delete-vaccine", new DeleteVacinaHandler());
 			server.createContext("/delete-appointment", new DeleteAgendaHandler());
 
+			server.createContext("/update-appointment", new UpdateAgendaHandler());
+
 			server.start();
 
 			System.out.println("Server started on port 8080");

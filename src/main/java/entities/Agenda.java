@@ -76,4 +76,12 @@ public class Agenda {
     public Usuario getUsuario() {
         return this.usuario;
     }
+
+		public void setSituation(Situacao situation) {
+			this.situation = situation;
+		}
+
+		public void setSituationDate(String situationDate) {
+			this.situationDate = situationDate;
+		}
 }
