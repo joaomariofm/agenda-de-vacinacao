@@ -17,6 +17,9 @@
 - [x] criar opções de marcar agenda como "Cancelada" ou "Realizada"
 
 - [ ] criar visualização das **alergias** de um usuário em específico
+    
+    - novo botão na tabela associado a listagem de alergia, o botão abre uma nova modal
+    - nova modal que exibe no nome de todas as alergia do usuário
 
 - [ ] criar filtro para visualizar apenas as **agendas do dia corrente**
 
