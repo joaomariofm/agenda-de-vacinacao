@@ -21,10 +21,10 @@
     - novo botão na tabela associado a listagem de alergia, o botão abre uma nova modal
     - nova modal que exibe no nome de todas as alergia do usuário
 
-- [ ] criar filtro para visualizar apenas as **agendas do dia corrente**
+- [x] criar filtro para visualizar apenas as **agendas do dia corrente**
 
-- [ ] sempre exibir primeiro as agendas no estado **Aguardando**, depois as agendas nos estados **Realizado** e **Cancelado**
+- [x] sempre exibir primeiro as agendas no estado **Aguardando**, depois as agendas nos estados **Realizado** e **Cancelado**
 
-- [ ] criar filtro para visualizar apenas as **agendas** de um usuário em específico
+- [x] criar filtro para visualizar apenas as **agendas** de um usuário em específico
 
 - [ ] alterar **input de estado (uf)** no **formulário do usuário** para um **select com os 26 etados**

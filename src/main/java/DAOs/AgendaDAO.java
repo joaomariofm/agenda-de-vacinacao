@@ -33,6 +33,13 @@ public class AgendaDAO {
         return agendas;
     }
 
+		public ArrayList<Agenda> readAllByDate(String date) {
+			entityManager.getTransaction().begin();
+			ArrayList<Agenda> agendas = (ArrayList<Agenda>) entityManager.createQuery("FROM Agenda WHERE date = :date").setParameter("date", date).getResultList();
+			entityManager.getTransaction().commit();
+			return agendas;
+		}
+
     public void update(Agenda agenda) {
         entityManager.getTransaction().begin();
         entityManager.merge(agenda);
