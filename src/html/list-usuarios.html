@@ -79,9 +79,17 @@
 				sex.classList.add('align-middle')
 				sex.innerText = user.sexo
 
-				const deleteButton = document.createElement('td')
-				deleteButton.innerHTML = "<button class='btn btn-danger' onclick='deleteUser(" + user.id + ")'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'><path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/></svg></button>"
-				deleteButton.classList.add('d-flex', 'justify-content-end')
+				const buttons = document.createElement('td')
+				buttons.classList.add('d-flex', 'justify-content-end', 'gap-2')
+
+				const deleteButton = document.createElement('div')
+				deleteButton.innerHTML =	"<button class='btn btn-danger' onclick='deleteUser(" + user.id + ")'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'><path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/></svg></button>"
+
+				const listAllergiesButton = document.createElement('div')
+				listAllergiesButton.innerHTML = "<button class='btn btn-primary' onclick='showUserAllergies(" + user.id + ")'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-virus' viewBox='0 0 16 16'><path d='M8 0a1 1 0 0 1 1 1v1.402c0 .511.677.693.933.25l.7-1.214a1 1 0 0 1 1.733 1l-.701 1.214c-.256.443.24.939.683.683l1.214-.701a1 1 0 0 1 1 1.732l-1.214.701c-.443.256-.262.933.25.933H15a1 1 0 1 1 0 2h-1.402c-.512 0-.693.677-.25.933l1.214.701a1 1 0 1 1-1 1.732l-1.214-.7c-.443-.257-.939.24-.683.682l.701 1.214a1 1 0 1 1-1.732 1l-.701-1.214c-.256-.443-.933-.262-.933.25V15a1 1 0 1 1-2 0v-1.402c0-.512-.677-.693-.933-.25l-.701 1.214a1 1 0 0 1-1.732-1l.7-1.214c.257-.443-.24-.939-.682-.683l-1.214.701a1 1 0 1 1-1-1.732l1.214-.701c.443-.256.261-.933-.25-.933H1a1 1 0 1 1 0-2h1.402c.511 0 .693-.677.25-.933l-1.214-.701a1 1 0 1 1 1-1.732l1.214.701c.443.256.939-.24.683-.683l-.701-1.214a1 1 0 0 1 1.732-1l.701 1.214c.256.443.933.261.933-.25V1a1 1 0 0 1 1-1m2 5a1 1 0 1 0-2 0 1 1 0 0 0 2 0M6 7a1 1 0 1 0-2 0 1 1 0 0 0 2 0m1 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m5-3a1 1 0 1 0-2 0 1 1 0 0 0 2 0'/></svg></button>"
+
+				buttons.appendChild(listAllergiesButton)
+				buttons.appendChild(deleteButton)
 
 				row.appendChild(id)
 				row.appendChild(name)
@@ -89,7 +97,7 @@
 				row.appendChild(city)
 				row.appendChild(uf)
 				row.appendChild(sex)
-				row.appendChild(deleteButton)
+				row.appendChild(buttons)
 
 				tableBody.appendChild(row)
 			})
@@ -169,6 +177,25 @@
 			})
 
 			loadUsers()
+		}
+
+		function showUserAllergies(id) {
+			const user = users.find(user => user.id === id)
+				
+			const allergiesModal = new bootstrap.Modal(document.querySelector('#allergiesModal'))
+
+			const allergiesModalTitle = document.querySelector('.allergies-modal-title')
+			allergiesModalTitle.innerText = `Alergias de ${user.name}`
+			const userAllergiesList = document.querySelector('.user-allergies-list')
+			userAllergiesList.innerHTML = ''
+			user.alergias.forEach(allergy => {
+				const li = document.createElement('li')
+				li.innerText = allergy.name
+
+				userAllergiesList.appendChild(li)
+			})
+
+			allergiesModal.show()
 		}
 		
 		function loadUsers() {
@@ -312,6 +339,22 @@
 					<div class="modal-footer">
 						<button onclick="cleanFormFields()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
 						<button onclick="addUser()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Adicionar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="allergiesModal" class="modal" aria-hidden="true" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title allergies-modal-title">...</h5>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<ul class="user-allergies-list">
+							<li>...</li>
+						</ul>
 					</div>
 				</div>
 			</div>
