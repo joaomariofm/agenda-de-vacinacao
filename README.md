@@ -1,3 +1,3 @@
-# Agenda de vacinação
+# Agenda de vacinação UFG
 
 ![DER](./docs/projectDER.png)
