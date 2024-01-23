@@ -40,6 +40,8 @@ No caso de não ter o java instalado, faça a instalação com o seguinte comand
     sudo apt update && sudo apt install default-jre -y 
 ```
 
+Também será preciso ter o maven instalado na sua máquina, a instalação pode ser feita seguindo este ![tutorial](https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu)
+
 Depois disso execute o **build** executando o seguinte comando na raiz do projeto
 
 ```bash
